@@ -1,0 +1,21 @@
+# Cloned source repos (dev only — không deploy)
+viethoaphim/
+air-quality/
+travel-app/
+app-videotoaudio/
+character-ai-team4/
+web-chatgpt/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Local
+*.log
+.env
+.env.local

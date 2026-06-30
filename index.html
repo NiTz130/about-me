@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#18181B" />
+  <meta name="description" content="Nguyễn Lê Đức Bình — Software Engineering student at Binh Duong University. Portfolio of React 19, Python AI/ML, Flutter, and full-stack web projects." />
+  <title>Nguyễn Lê Đức Bình · Developer Portfolio</title>
+
+  <!-- Preload critical font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind via CDN (single-file demo) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+            body: ['"Inter"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            primary: '#18181B',
+            onPrimary: '#FFFFFF',
+            secondary: '#3F3F46',
+            accent: '#2563EB',
+            accentHover: '#1D4ED8',
+            bg: '#FAFAFA',
+            fg: '#09090B',
+            muted: '#E8ECF0',
+            border: '#E4E4E7',
+            destructive: '#DC2626',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Design tokens via CSS variables */
+    :root {
+      --color-primary: #18181B;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #52525B;
+      --color-accent: #2563EB;
+      --color-accent-hover: #1D4ED8;
+      --color-bg: #FAFAFA;
+      --color-surface: #FFFFFF;
+      --color-fg: #09090B;
+      --color-muted: #F4F4F5;
+      --color-border: #E4E4E7;
+      --color-destructive: #DC2626;
+      --ring: #18181B;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 10px 25px -5px rgb(0 0 0 / 0.12), 0 4px 10px -4px rgb(0 0 0 / 0.06);
+      --shadow-xl: 0 20px 50px -10px rgb(0 0 0 / 0.18);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration: 200ms;
+    }
+
+    .dark {
+      --color-bg: #0A0A0F;
+      --color-surface: #18181F;
+      --color-fg: #FAFAFA;
+      --color-secondary: #A1A1AA;
+      --color-muted: #27272F;
+      --color-border: #3F3F46;
+      --color-primary: #FAFAFA;
+      --color-on-primary: #09090B;
+      --ring: #FAFAFA;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+      --shadow-lg: 0 10px 25px -5px rgb(0 0 0 / 0.6), 0 4px 10px -4px rgb(0 0 0 / 0.4);
+      --shadow-xl: 0 20px 50px -10px rgb(0 0 0 / 0.7);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-fg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--duration) var(--ease-out),
+                  color var(--duration) var(--ease-out);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    /* Focus ring — visible for keyboard nav (a11y) */
+    *:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* Scroll reveal — Intersection Observer driven */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 80ms; }
+    .reveal-delay-2 { transition-delay: 160ms; }
+    .reveal-delay-3 { transition-delay: 240ms; }
+    .reveal-delay-4 { transition-delay: 320ms; }
+
+    /* Hero grid background */
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    }
+
+    /* Project card hover */
+    .project-card {
+      transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out), border-color 300ms var(--ease-out);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--color-accent);
+    }
+    .project-card .arrow {
+      transition: transform 300ms var(--ease-out), color 300ms var(--ease-out);
+      color: var(--color-accent);
+    }
+    .project-card:hover .arrow {
+      transform: translate(4px, -4px);
+    }
+
+    /* Button press feedback */
+    .btn {
+      transition: background-color 200ms var(--ease-out), transform 150ms var(--ease-out);
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Cursor for clickable cards */
+    a, button, [role="button"] {
+      cursor: pointer;
+    }
+
+    /* Smooth motion only when user allows */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* Tabular numbers for stats */
+    .num {
+      font-variant-numeric: tabular-nums;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Skill tag */
+    .tag {
+      transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out);
+    }
+    .tag:hover {
+      background: var(--color-accent);
+      color: white;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      padding: 8px 16px;
+      z-index: 100;
+      transition: top 200ms;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+  </style>
+</head>
+
+<body class="min-h-dvh antialiased">
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ========== NAV ========== -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-[color:var(--color-surface)]/80 border-b border-[color:var(--color-border)]">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between" aria-label="Điều hướng chính">
+      <a href="#top" class="font-display font-bold text-lg tracking-tight" aria-label="Trang chủ">
+        NiTz<span class="text-[color:var(--color-accent)]">.</span>dev
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="#about" class="hover:text-[color:var(--color-accent)] transition-colors">About</a></li>
+        <li><a href="#projects" class="hover:text-[color:var(--color-accent)] transition-colors">Projects</a></li>
+        <li><a href="#skills" class="hover:text-[color:var(--color-accent)] transition-colors">Skills</a></li>
+        <li><a href="#contact" class="hover:text-[color:var(--color-accent)] transition-colors">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <button
+          id="theme-toggle"
+          type="button"
+          class="btn w-10 h-10 grid place-items-center rounded-lg border border-[color:var(--color-border)] hover:bg-[color:var(--color-muted)] transition-colors"
+          aria-label="Chuyển dark mode"
+        >
+          <svg class="w-5 h-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="w-5 h-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <a
+          href="https://github.com/NiTz130"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn hidden sm:inline-flex items-center gap-2 px-4 h-10 rounded-lg bg-[color:var(--color-primary)] text-[color:var(--color-on-primary)] text-sm font-medium hover:opacity-90"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 0a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.05c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 0z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ========== HERO ========== -->
+    <section id="top" class="relative overflow-hidden">
+      <div class="absolute inset-0 grid-bg opacity-50 dark:opacity-20" aria-hidden="true"></div>
+      <!-- Accent gradient blob (visible in both modes) -->
+      <div
+        class="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full blur-3xl opacity-30 dark:opacity-20 pointer-events-none"
+        style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="absolute top-40 -left-40 w-[400px] h-[400px] rounded-full blur-3xl opacity-20 dark:opacity-15 pointer-events-none"
+        style="background: radial-gradient(circle, #8B5CF6 0%, transparent 70%);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-32 md:pb-32">
+        <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight reveal">
+          Nguyễn Lê<br/>
+          Đức Bình<span class="text-[color:var(--color-accent)]">.</span>
+        </h1>
+
+        <p class="mt-8 text-xl md:text-2xl text-[color:var(--color-secondary)] max-w-2xl font-light reveal reveal-delay-2">
+          Software Engineering student at <span class="text-[color:var(--color-fg)] font-medium">Binh Duong University</span>, building real-world projects from <span class="text-[color:var(--color-fg)] font-medium">AI/ML</span> pipelines to <span class="text-[color:var(--color-fg)] font-medium">full-stack web</span> and <span class="text-[color:var(--color-fg)] font-medium">mobile apps</span>.
+        </p>
+
+        <div class="mt-10 flex flex-wrap items-center gap-4 reveal reveal-delay-3">
+          <a
+            href="#projects"
+            class="btn inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-[color:var(--color-primary)] text-[color:var(--color-on-primary)] font-medium"
+          >
+            View projects
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a
+            href="#contact"
+            class="btn inline-flex items-center gap-2 h-12 px-6 rounded-lg border border-[color:var(--color-border)] font-medium hover:bg-[color:var(--color-muted)] transition-colors"
+          >
+            Contact
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <dl class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-[color:var(--color-border)] rounded-2xl overflow-hidden border border-[color:var(--color-border)] reveal reveal-delay-4">
+          <div class="bg-[color:var(--color-surface)] p-6">
+            <dt class="text-xs uppercase tracking-wider text-[color:var(--color-secondary)]">Repos</dt>
+            <dd class="num text-3xl md:text-4xl font-bold mt-1">11</dd>
+          </div>
+          <div class="bg-[color:var(--color-surface)] p-6">
+            <dt class="text-xs uppercase tracking-wider text-[color:var(--color-secondary)]">Public</dt>
+            <dd class="num text-3xl md:text-4xl font-bold mt-1">11</dd>
+          </div>
+          <div class="bg-[color:var(--color-surface)] p-6">
+            <dt class="text-xs uppercase tracking-wider text-[color:var(--color-secondary)]">Languages</dt>
+            <dd class="num text-3xl md:text-4xl font-bold mt-1">7</dd>
+          </div>
+          <div class="bg-[color:var(--color-surface)] p-6">
+            <dt class="text-xs uppercase tracking-wider text-[color:var(--color-secondary)]">Years</dt>
+            <dd class="num text-3xl md:text-4xl font-bold mt-1">2+</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="py-24 border-t border-[color:var(--color-border)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-12 gap-12">
+          <div class="md:col-span-4">
+            <p class="text-sm font-mono text-[color:var(--color-accent)] reveal">// 01 — About</p>
+            <h2 class="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight reveal reveal-delay-1">
+              About
+            </h2>
+          </div>
+
+          <div class="md:col-span-8 space-y-6 text-lg text-[color:var(--color-secondary)] leading-relaxed reveal reveal-delay-2">
+            <p>
+              Software Engineering student at Binh Duong University with a <span class="text-[color:var(--color-fg)] font-medium">strong willingness to learn</span> and seek an internship opportunity. Possesses basic knowledge of software development and problem solving through academic and personal project. Familiar with general computer skills and office tools such as Word, Excel and PowerPoint. <span class="text-[color:var(--color-fg)] font-medium">Proficient in using AI tools</span> to boost productivity in job.
+            </p>
+
+            <!-- Quick facts -->
+            <ul class="grid sm:grid-cols-2 gap-4 pt-4">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[color:var(--color-accent)] mt-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <div>
+                  <p class="text-[color:var(--color-fg)] font-medium">Based in</p>
+                  <p>Minh Thanh 1, Chon Thanh, Dong Nai</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[color:var(--color-accent)] mt-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div>
+                  <p class="text-[color:var(--color-fg)] font-medium">Currently</p>
+                  <p>Open to internship</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[color:var(--color-accent)] mt-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div>
+                  <p class="text-[color:var(--color-fg)] font-medium">Studying</p>
+                  <p>Software Engineering · BDU</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROJECTS ========== -->
+    <section id="projects" class="py-24 border-t border-[color:var(--color-border)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-end justify-between flex-wrap gap-4 mb-12">
+          <div>
+            <p class="text-sm font-mono text-[color:var(--color-accent)] reveal">// 02 — Projects</p>
+            <h2 class="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight reveal reveal-delay-1">
+              Featured Projects
+            </h2>
+            <p class="mt-3 text-[color:var(--color-secondary)] max-w-xl reveal reveal-delay-2">
+              Top 5 repos on my GitHub.
+            </p>
+          </div>
+          <a
+            href="https://github.com/NiTz130?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn inline-flex items-center gap-2 text-sm font-medium text-[color:var(--color-accent)] hover:underline reveal reveal-delay-2"
+          >
+            View all on GitHub
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Featured: web-chatgpt -->
+          <div class="project-card md:col-span-2 relative p-8 md:p-10 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] reveal">
+            <a
+              href="https://github.com/NiTz130/web-chatgpt"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="absolute inset-0 z-0 rounded-2xl"
+              aria-label="Open Web ChatGPT repo on GitHub"
+            ></a>
+            <div class="relative z-10 pointer-events-none">
+              <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
+                <div class="flex items-center gap-3 flex-wrap">
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[color:var(--color-muted)]">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span class="font-mono text-xs px-2 py-1 rounded bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300">React 19 · TypeScript</span>
+                  <span class="font-mono text-xs px-2 py-1 rounded bg-gradient-to-r from-amber-200 to-pink-200 text-amber-900 dark:from-amber-900 dark:to-pink-900 dark:text-amber-200">★ FEATURED</span>
+                </div>
+                <svg class="arrow w-5 h-5 text-[color:var(--color-secondary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="font-display text-2xl md:text-3xl font-semibold mb-2">Web ChatGPT</h3>
+              <p class="text-[color:var(--color-secondary)] leading-relaxed md:text-lg max-w-3xl">
+                Full-stack AI assistant UI — <strong>React 19 + TypeScript + Vite</strong>, Node proxy calls OpenAI Responses &amp; Image APIs. Comes with <strong>10 specialized skills</strong> (translator, resume, email…), exports to <strong>PDF/DOCX/ZIP</strong>, voice input, image generation with fallback model. Mock mode runs without an API key.
+              </p>
+              <ul class="mt-6 flex flex-wrap gap-2 text-xs font-mono">
+                <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">React 19</li>
+                <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">TypeScript 5.8</li>
+                <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">Vite 7</li>
+                <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">OpenAI Responses + Images</li>
+                <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">pdfmake / docx / jszip</li>
+                <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">Vercel + Render</li>
+              </ul>
+            </div>
+            <!-- Live demo CTA — sits above the stretched link -->
+            <a
+              href="https://web-chatgpt-theta.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn pointer-events-auto absolute top-6 right-6 z-20 inline-flex items-center gap-1.5 h-9 px-3 rounded-lg bg-emerald-500 text-white text-xs font-semibold hover:bg-emerald-600 shadow-md"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Live
+            </a>
+          </div>
+
+          <!-- Project 2: viethoaphim -->
+          <a
+            href="https://github.com/NiTz130/viethoaphim"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-card block p-8 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] group reveal"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[color:var(--color-muted)]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                  </svg>
+                </span>
+                <span class="font-mono text-xs px-2 py-1 rounded bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">Python · AI/ML</span>
+              </div>
+              <svg class="arrow w-5 h-5 text-[color:var(--color-secondary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-2xl font-semibold mb-2">VietDub</h3>
+            <p class="text-[color:var(--color-secondary)] leading-relaxed">
+              Automated CLI pipeline for Vietnamese dubbing of Chinese cartoon videos — integrates PaddleOCR, faster-whisper, MiniMax LLM/TTS, with CI &amp; regression tests.
+            </p>
+            <ul class="mt-6 flex flex-wrap gap-2 text-xs font-mono">
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">PaddleOCR 3.x</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">faster-whisper</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">Anthropic SDK</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">pytest</li>
+            </ul>
+          </a>
+
+          <!-- Project 2: air-quality -->
+          <a
+            href="https://github.com/NiTz130/air-quality"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-card block p-8 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] group reveal reveal-delay-1"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[color:var(--color-muted)]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M3 15h18M3 9h18M3 3h18" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="font-mono text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">Full-stack</span>
+              </div>
+              <svg class="arrow w-5 h-5 text-[color:var(--color-secondary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-2xl font-semibold mb-2">Air Quality Monitoring</h3>
+            <p class="text-[color:var(--color-secondary)] leading-relaxed">
+              Real-time dashboard for monitoring classroom air quality, automatically controlling ventilation fans via <strong>Fuzzy Logic</strong> — React + FastAPI + Pandas.
+            </p>
+            <ul class="mt-6 flex flex-wrap gap-2 text-xs font-mono">
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">React 18</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">FastAPI</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">scikit-fuzzy</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">Recharts</li>
+            </ul>
+          </a>
+
+          <!-- Project 3: travel-app -->
+          <a
+            href="https://github.com/NiTz130/travel-app"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-card block p-8 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] group reveal reveal-delay-2"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[color:var(--color-muted)]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="font-mono text-xs px-2 py-1 rounded bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300">Flutter · Mobile</span>
+              </div>
+              <svg class="arrow w-5 h-5 text-[color:var(--color-secondary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-2xl font-semibold mb-2">Travel App</h3>
+            <p class="text-[color:var(--color-secondary)] leading-relaxed">
+              Flutter travel planning app for Android — Firebase Auth + Firestore + BLoC, integrates Google Maps, Pexels, and weather APIs.
+            </p>
+            <ul class="mt-6 flex flex-wrap gap-2 text-xs font-mono">
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">Flutter 3.x</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">Firebase</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">flutter_bloc</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">Syncfusion Maps</li>
+            </ul>
+          </a>
+
+          <!-- Project 4: app-videotoaudio -->
+          <a
+            href="https://github.com/NiTz130/app-videotoaudio"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-card block p-8 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] group reveal reveal-delay-3"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[color:var(--color-muted)]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="2" y="6" width="14" height="12" rx="2"/>
+                    <path d="M22 8l-6 4 6 4V8z" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="font-mono text-xs px-2 py-1 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">Python · Desktop</span>
+              </div>
+              <svg class="arrow w-5 h-5 text-[color:var(--color-secondary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-2xl font-semibold mb-2">Video To Audio</h3>
+            <p class="text-[color:var(--color-secondary)] leading-relaxed">
+              Windows desktop app that extracts audio from video — Tkinter GUI, bundles FFmpeg via <code>imageio-ffmpeg</code>, packaged as .exe with PyInstaller.
+            </p>
+            <ul class="mt-6 flex flex-wrap gap-2 text-xs font-mono">
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">Python 3.8+</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">Tkinter</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">FFmpeg</li>
+              <li class="px-2 py-1 rounded bg-[color:var(--color-muted)]">PyInstaller</li>
+            </ul>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section id="skills" class="py-24 border-t border-[color:var(--color-border)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <p class="text-sm font-mono text-[color:var(--color-accent)] reveal">// 03 — Skills</p>
+        <h2 class="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight reveal reveal-delay-1">
+          Tech stack
+        </h2>
+
+        <div class="mt-12 grid md:grid-cols-3 gap-6">
+          <!-- Languages -->
+          <div class="p-6 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] reveal">
+            <h3 class="font-display text-lg font-semibold flex items-center gap-2">
+              <svg class="w-5 h-5 text-[color:var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="16 18 22 12 16 6" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="8 6 2 12 8 18" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Languages
+            </h3>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Python</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">JavaScript</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">TypeScript</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Dart</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">PHP</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">SQL</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">HTML/CSS</span>
+            </div>
+          </div>
+
+          <!-- Frameworks -->
+          <div class="p-6 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] reveal reveal-delay-1">
+            <h3 class="font-display text-lg font-semibold flex items-center gap-2">
+              <svg class="w-5 h-5 text-[color:var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7" stroke-linecap="round"/>
+                <rect x="14" y="3" width="7" height="7" stroke-linecap="round"/>
+                <rect x="3" y="14" width="7" height="7" stroke-linecap="round"/>
+                <rect x="14" y="14" width="7" height="7" stroke-linecap="round"/>
+              </svg>
+              Frameworks
+            </h3>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">FastAPI</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">React</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Next.js</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Flutter</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Node.js</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Tailwind</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Tkinter</span>
+            </div>
+          </div>
+
+          <!-- AI/ML & Tools -->
+          <div class="p-6 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] reveal reveal-delay-2">
+            <h3 class="font-display text-lg font-semibold flex items-center gap-2">
+              <svg class="w-5 h-5 text-[color:var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2z" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              AI/ML & Tools
+            </h3>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">OpenAI API</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Anthropic Claude</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">PaddleOCR</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">faster-whisper</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">scikit-fuzzy</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Prompt Engineering</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">LLM Streaming</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Firebase</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">FFmpeg</span>
+              <span class="tag font-mono text-sm px-3 py-1.5 rounded-md border border-[color:var(--color-border)] cursor-default">Git/GitHub</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="py-24 border-t border-[color:var(--color-border)]">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <p class="text-sm font-mono text-[color:var(--color-accent)] reveal">// 04 — Contact</p>
+        <h2 class="font-display text-4xl md:text-6xl font-bold mt-3 tracking-tight reveal reveal-delay-1">
+          Get in touch
+        </h2>
+        <p class="mt-6 text-lg text-[color:var(--color-secondary)] max-w-xl mx-auto reveal reveal-delay-2">
+          Looking for internship / junior developer opportunities.
+        </p>
+
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-4 reveal reveal-delay-3">
+          <a
+            href="mailto:ducbinh645213@gmail.com?subject=Internship%20Application%20%E2%80%94%20Software%20Engineering%20Student"
+            class="btn inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-[color:var(--color-accent)] text-white font-medium hover:bg-[color:var(--color-accent-hover)]"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="22,6 12,13 2,6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Send email
+          </a>
+          <a
+            href="tel:+840334764216"
+            class="btn inline-flex items-center gap-2 h-12 px-6 rounded-lg border border-[color:var(--color-border)] font-medium hover:bg-[color:var(--color-muted)] transition-colors"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Call 0334764216
+          </a>
+          <a
+            href="https://github.com/NiTz130"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn inline-flex items-center gap-2 h-12 px-6 rounded-lg border border-[color:var(--color-border)] font-medium hover:bg-[color:var(--color-muted)] transition-colors"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 0a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.05c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 0z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // === Theme toggle (with localStorage + system preference) ===
+    (function () {
+      const html = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        html.classList.add('dark');
+      }
+
+      const btn = document.getElementById('theme-toggle');
+      btn.addEventListener('click', () => {
+        const isDark = html.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    })();
+
+    // === Scroll reveal (Intersection Observer) ===
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: show all
+        els.forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+
+      els.forEach(el => io.observe(el));
+    })();
+
+    // === Smooth scroll with focus management (a11y) ===
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href === '#' || href.length < 2) return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Update focus for screen readers without scroll jump
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+      });
+    });
+  </script>
+</body>
+</html>
