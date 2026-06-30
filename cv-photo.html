@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nguyễn Lê Đức Bình — CV (with photo)</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #1a1a1a;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      display: grid;
+      grid-template-columns: 32% 68%;
+      min-height: 100vh;
+    }
+    /* ============ LEFT COLUMN (Photo + Contact) ============ */
+    .left {
+      background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+      color: #ffffff;
+      padding: 12mm 8mm;
+    }
+    .photo-frame {
+      width: 32mm;
+      height: 40mm;
+      margin: 0 auto 8mm;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .name-block {
+      text-align: center;
+      margin-bottom: 8mm;
+    }
+    .name-block h1 {
+      font-size: 17pt;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.15;
+      color: #ffffff;
+    }
+    .name-block .tagline {
+      font-size: 9.5pt;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 2mm;
+    }
+    .section-title-left {
+      font-size: 9pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 6mm 0 2mm 0;
+      padding-bottom: 2mm;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .left ul { list-style: none; }
+    .left li { margin: 1.5mm 0; font-size: 9pt; line-height: 1.4; }
+    .left a { color: #ffffff; text-decoration: none; word-break: break-all; }
+    .left .icon {
+      display: inline-block;
+      width: 4mm;
+      margin-right: 2mm;
+      opacity: 0.8;
+    }
+    .left .label {
+      display: block;
+      font-size: 7.5pt;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 1mm;
+    }
+    .skill-pill {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      font-size: 8.5pt;
+      padding: 1mm 2.5mm;
+      border-radius: 2mm;
+      margin: 1mm 1mm 0 0;
+    }
+
+    /* ============ RIGHT COLUMN (Content) ============ */
+    .right {
+      padding: 12mm 10mm;
+    }
+    h2 {
+      font-size: 10pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #2563eb;
+      margin: 8mm 0 3mm 0;
+      padding-bottom: 1.5mm;
+      border-bottom: 1.5pt solid #2563eb;
+    }
+    h2:first-child { margin-top: 0; }
+    p { margin: 2pt 0; }
+    a { color: #2563eb; text-decoration: none; }
+    .summary {
+      background: #f9fafb;
+      border-left: 3pt solid #2563eb;
+      padding: 3mm 4mm;
+      margin-top: 2mm;
+    }
+    .summary p { font-size: 9.8pt; line-height: 1.5; }
+    .meta { font-size: 8.5pt; color: #71717a; font-style: italic; margin-top: 1pt; }
+    .project { margin-top: 5pt; }
+    .project-header { display: flex; justify-content: space-between; align-items: baseline; gap: 4pt; }
+    .project-title { font-weight: 600; color: #18181b; font-size: 10pt; }
+    .project-link { font-size: 8pt; color: #2563eb; }
+    .project-meta { font-size: 8pt; color: #71717a; font-style: italic; margin-top: 1pt; }
+    .project-desc { margin-top: 1.5pt; font-size: 9.3pt; line-height: 1.4; }
+    .project-tags { font-size: 7.8pt; color: #52525b; margin-top: 2pt; font-family: 'Consolas', 'Courier New', monospace; }
+    .project-tags span { background: #f4f4f5; padding: 0.5pt 4pt; border-radius: 2pt; margin-right: 2pt; }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ============ LEFT COLUMN ============ -->
+    <aside class="left">
+      <div class="photo-frame">
+        <span>NB</span>
+      </div>
+
+      <div class="name-block">
+        <h1>Nguyễn Lê<br/>Đức Bình</h1>
+        <p class="tagline">Software Engineering Student</p>
+      </div>
+
+      <div class="section-title-left">Contact</div>
+      <ul>
+        <li>
+          <span class="icon">✉</span>
+          <a href="mailto:ducbinh645213@gmail.com">ducbinh645213@gmail.com</a>
+        </li>
+        <li>
+          <span class="icon">☎</span>
+          <a href="tel:+840334764216">0334764216</a>
+        </li>
+        <li>
+          <span class="icon">⌂</span>
+          Minh Thanh 1, Chon Thanh, Dong Nai
+        </li>
+        <li>
+          <span class="icon">⌘</span>
+          <a href="https://github.com/NiTz130">github.com/NiTz130</a>
+        </li>
+      </ul>
+
+      <div class="section-title-left">Skills</div>
+      <div>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">TypeScript</span>
+        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">Dart</span>
+        <span class="skill-pill">PHP</span>
+        <span class="skill-pill">React</span>
+        <span class="skill-pill">Next.js</span>
+        <span class="skill-pill">FastAPI</span>
+        <span class="skill-pill">Flutter</span>
+        <span class="skill-pill">Node.js</span>
+        <span class="skill-pill">OpenAI</span>
+        <span class="skill-pill">Claude</span>
+        <span class="skill-pill">PaddleOCR</span>
+        <span class="skill-pill">Firebase</span>
+        <span class="skill-pill">FFmpeg</span>
+      </div>
+
+      <div class="section-title-left">Languages</div>
+      <ul>
+        <li><strong>Vietnamese</strong><span class="label">Native</span></li>
+        <li><strong>English</strong><span class="label">Basic reading & writing</span></li>
+      </ul>
+    </aside>
+
+    <!-- ============ RIGHT COLUMN ============ -->
+    <main class="right">
+
+      <h2>Profile</h2>
+      <div class="summary">
+        <p>Software Engineering student at Binh Duong University with a strong willingness to learn and seek an internship opportunity. Possesses basic knowledge of software development and problem solving through academic and personal project. Familiar with general computer skills and office tools such as Word, Excel and PowerPoint. Proficient in using AI tools to boost productivity in job.</p>
+      </div>
+
+      <h2>Education</h2>
+      <p><strong>Binh Duong University (BDU)</strong> — Software Engineering</p>
+      <p class="meta">Class of 2027</p>
+
+      <h2>Projects</h2>
+
+      <div class="project">
+        <div class="project-header">
+          <span class="project-title">Web ChatGPT</span>
+          <span class="project-link">github.com/NiTz130/web-chatgpt</span>
+        </div>
+        <p class="project-meta">React 19 · TypeScript · Vite · OpenAI · 2026</p>
+        <p class="project-desc">Full-stack AI assistant UI with Node proxy to OpenAI Responses & Image APIs. Includes 10 specialized skills (translator, resume, email), PDF/DOCX/ZIP export, voice input, image generation with model fallback. Live at web-chatgpt-theta.vercel.app.</p>
+        <p class="project-tags"><span>React 19</span><span>TypeScript 5.8</span><span>Vite 7</span><span>OpenAI</span><span>Vercel + Render</span></p>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <span class="project-title">VietDub (viethoaphim)</span>
+          <span class="project-link">github.com/NiTz130/viethoaphim</span>
+        </div>
+        <p class="project-meta">Python · PaddleOCR · faster-whisper · MiniMax LLM/TTS · 2026</p>
+        <p class="project-desc">Automated CLI pipeline for Vietnamese dubbing of Chinese cartoon videos. Integrates PaddleOCR for hard-sub detection, faster-whisper for STT, MiniMax LLM for translation, and MiniMax Speech for TTS. Includes CI and OCR regression harness.</p>
+        <p class="project-tags"><span>Python 3.11+</span><span>PaddleOCR 3.x</span><span>faster-whisper</span><span>Anthropic SDK</span><span>pytest</span></p>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <span class="project-title">Air Quality Monitoring</span>
+          <span class="project-link">github.com/NiTz130/air-quality</span>
+        </div>
+        <p class="project-meta">React · FastAPI · Fuzzy Logic · 2025</p>
+        <p class="project-desc">Real-time classroom air quality dashboard with automatic ventilation control via Fuzzy Logic. React 18 frontend with Recharts, FastAPI backend processing CSV sensor data, scikit-fuzzy for inference.</p>
+        <p class="project-tags"><span>React 18</span><span>FastAPI</span><span>scikit-fuzzy</span><span>Pandas</span><span>Recharts</span></p>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <span class="project-title">Travel App</span>
+          <span class="project-link">github.com/NiTz130/travel-app</span>
+        </div>
+        <p class="project-meta">Flutter · Firebase · 2025</p>
+        <p class="project-desc">Android travel planning app — Firebase Auth + Firestore + BLoC state management, integrates Google Maps, Pexels imagery, and weather APIs. Firebase Emulator configured for local dev.</p>
+        <p class="project-tags"><span>Flutter 3.x</span><span>Firebase</span><span>flutter_bloc</span><span>Syncfusion Maps</span></p>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <span class="project-title">Video To Audio</span>
+          <span class="project-link">github.com/NiTz130/app-videotoaudio</span>
+        </div>
+        <p class="project-meta">Python · Tkinter · FFmpeg · 2026</p>
+        <p class="project-desc">Windows desktop app for extracting audio from video files. Tkinter GUI, bundles FFmpeg via imageio-ffmpeg (no manual install needed), packaged as .exe with PyInstaller. Supports MP3, M4A, WAV, FLAC, OGG, OPUS output.</p>
+        <p class="project-tags"><span>Python 3.8+</span><span>Tkinter</span><span>FFmpeg</span><span>PyInstaller</span></p>
+      </div>
+
+    </main>
+  </div>
+</body>
+</html>
