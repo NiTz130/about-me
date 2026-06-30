@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nguyễn Lê Đức Bình — CV</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 14mm 16mm 14mm 16mm;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.5;
+      color: #1a1a1a;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    h1 { font-size: 22pt; font-weight: 700; letter-spacing: -0.5px; }
+    h2 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #2563eb;
+      margin: 14pt 0 6pt 0;
+      padding-bottom: 2pt;
+      border-bottom: 1.5pt solid #2563eb;
+    }
+    h3 { font-size: 11pt; font-weight: 600; margin-top: 8pt; }
+    p { margin: 3pt 0; }
+    a { color: #2563eb; text-decoration: none; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .header-left h1 { color: #18181b; }
+    .header-left .tagline { font-size: 11pt; color: #52525b; margin-top: 2pt; }
+    .header-right { text-align: right; font-size: 9.5pt; color: #3f3f46; line-height: 1.5; }
+    .header-right a { color: #2563eb; }
+    .meta { font-size: 9pt; color: #71717a; font-style: italic; margin-top: 1pt; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8pt; margin-top: 4pt; }
+    .skill-block h4 {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #18181b;
+      margin-bottom: 3pt;
+    }
+    .skill-block p { font-size: 9.8pt; line-height: 1.45; }
+    .project { margin-top: 8pt; }
+    .project-header { display: flex; justify-content: space-between; align-items: baseline; }
+    .project-title { font-weight: 600; color: #18181b; font-size: 10.5pt; }
+    .project-link { font-size: 9pt; color: #2563eb; }
+    .project-meta { font-size: 8.5pt; color: #71717a; font-style: italic; }
+    .project-desc { margin-top: 2pt; font-size: 9.8pt; line-height: 1.45; }
+    .project-tags { font-size: 8.5pt; color: #52525b; margin-top: 3pt; font-family: 'Consolas', 'Courier New', monospace; }
+    .project-tags span { background: #f4f4f5; padding: 1pt 5pt; border-radius: 2pt; margin-right: 3pt; }
+    .summary { background: #f9fafb; border-left: 3pt solid #2563eb; padding: 6pt 9pt; margin-top: 4pt; }
+    .summary p { font-size: 10pt; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-left">
+      <h1>Nguyễn Lê Đức Bình</h1>
+      <p class="tagline">Sinh viên Software Engineering</p>
+    </div>
+    <div class="header-right">
+      <a href="mailto:ducbinh645213@gmail.com">ducbinh645213@gmail.com</a><br/>
+      <a href="tel:+840334764216">0334764216</a><br/>
+      Minh Thanh 1, Chon Thanh, Dong Nai<br/>
+      <a href="https://github.com/NiTz130">github.com/NiTz130</a>
+    </div>
+  </div>
+
+  <h2>Hồ sơ</h2>
+  <div class="summary">
+    <p>Sinh viên Software Engineering tại Đại học Bình Dương, có tinh thần ham học hỏi và mong muốn tìm cơ hội thực tập. Có kiến thức cơ bản về phát triển phần mềm và giải quyết vấn đề qua các dự án học tập và cá nhân. Thành thạo các công cụ văn phòng như Word, Excel, PowerPoint. Thành thạo sử dụng công cụ AI để tăng năng suất công việc.</p>
+  </div>
+
+  <h2>Học vấn</h2>
+  <p><strong>Đại học Bình Dương (BDU)</strong> — Software Engineering</p>
+  <p class="meta">Khóa 2027</p>
+
+  <h2>Kỹ năng kỹ thuật</h2>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <h4>Ngôn ngữ</h4>
+      <p>Python, JavaScript, TypeScript, Dart, PHP, SQL, HTML/CSS</p>
+    </div>
+    <div class="skill-block">
+      <h4>Framework</h4>
+      <p>FastAPI, React, Next.js, Flutter, Node.js, Tailwind, Tkinter</p>
+    </div>
+    <div class="skill-block">
+      <h4>AI/ML & Công cụ</h4>
+      <p>OpenAI API, Anthropic Claude, PaddleOCR, faster-whisper, scikit-fuzzy, Prompt Engineering, LLM Streaming, Firebase, FFmpeg, Git/GitHub</p>
+    </div>
+  </div>
+
+  <h2>Dự án</h2>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-title">Web ChatGPT</span>
+      <span class="project-link">github.com/NiTz130/web-chatgpt</span>
+    </div>
+    <p class="project-meta">React 19 · TypeScript · Vite · OpenAI · 2026</p>
+    <p class="project-desc">Giao diện trợ lý AI full-stack với Node proxy gọi OpenAI Responses & Image APIs. Có sẵn 10 skills chuyên biệt (translator, resume, email), xuất PDF/DOCX/ZIP, voice input, image generation với model fallback. Mock mode chạy không cần API key. Live tại web-chatgpt-theta.vercel.app.</p>
+    <p class="project-tags"><span>React 19</span><span>TypeScript 5.8</span><span>Vite 7</span><span>OpenAI</span><span>Vercel + Render</span></p>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-title">VietDub (viethoaphim)</span>
+      <span class="project-link">github.com/NiTz130/viethoaphim</span>
+    </div>
+    <p class="project-meta">Python · PaddleOCR · faster-whisper · MiniMax LLM/TTS · 2026</p>
+    <p class="project-desc">Pipeline CLI tự động lồng tiếng Việt cho video hoạt hình Trung Quốc. Tích hợp PaddleOCR cho hard-sub, faster-whisper cho STT, MiniMax LLM cho dịch thuật, MiniMax Speech cho TTS. Có CI và OCR regression harness.</p>
+    <p class="project-tags"><span>Python 3.11+</span><span>PaddleOCR 3.x</span><span>faster-whisper</span><span>Anthropic SDK</span><span>pytest</span></p>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-title">Air Quality Monitoring</span>
+      <span class="project-link">github.com/NiTz130/air-quality</span>
+    </div>
+    <p class="project-meta">React · FastAPI · Fuzzy Logic · 2025</p>
+    <p class="project-desc">Dashboard real-time giám sát chất lượng không khí phòng học, điều khiển quạt thông gió tự động bằng Fuzzy Logic. Frontend React 18 với Recharts, backend FastAPI xử lý dữ liệu CSV, scikit-fuzzy cho inference.</p>
+    <p class="project-tags"><span>React 18</span><span>FastAPI</span><span>scikit-fuzzy</span><span>Pandas</span><span>Recharts</span></p>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-title">Travel App</span>
+      <span class="project-link">github.com/NiTz130/travel-app</span>
+    </div>
+    <p class="project-meta">Flutter · Firebase · 2025</p>
+    <p class="project-desc">Ứng dụng Flutter lên kế hoạch du lịch Android — Firebase Auth + Firestore + BLoC state management, tích hợp Google Maps, Pexels imagery, weather API. Firebase Emulator configured cho dev local.</p>
+    <p class="project-tags"><span>Flutter 3.x</span><span>Firebase</span><span>flutter_bloc</span><span>Syncfusion Maps</span></p>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-title">Video To Audio</span>
+      <span class="project-link">github.com/NiTz130/app-videotoaudio</span>
+    </div>
+    <p class="project-meta">Python · Tkinter · FFmpeg · 2026</p>
+    <p class="project-desc">App desktop Windows tách audio từ video. GUI Tkinter, bundle FFmpeg qua imageio-ffmpeg (không cần cài thủ công), đóng gói .exe bằng PyInstaller. Hỗ trợ MP3, M4A, WAV, FLAC, OGG, OPUS.</p>
+    <p class="project-tags"><span>Python 3.8+</span><span>Tkinter</span><span>FFmpeg</span><span>PyInstaller</span></p>
+  </div>
+
+  <h2>Ngoại ngữ</h2>
+  <p><strong>Tiếng Việt</strong> — Bản ngữ &nbsp;·&nbsp; <strong>Tiếng Anh</strong> — Đọc viết cơ bản</p>
+
+</body>
+</html>
